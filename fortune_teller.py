@@ -246,8 +246,7 @@ def display_fortune(category):
 
     # Hoi Lam Wong 12/4/2023
     def save_fortune_confirm_window():
-        res = tk.messagebox.askquestion('Save Fortune', 'Do you want to save your fortune?')
-        if res == 'yes' :
+        if (res := tk.messagebox.askquestion('Save Fortune', 'Do you want to save your fortune?')) == 'yes' :
             if DBHelper.save_fortune_to_table(category, user_fortune):
                 tk.messagebox.showinfo(title=None, message='Fortune saved successfully!')
             else :
@@ -340,8 +339,7 @@ def user_menu():
 
 def signout_window(user_menu_tk):
     ''' method to handle user sign out confirmation '''
-    res = tk.messagebox.askquestion(title='Sign Out', message='Confirm Sign Out?')
-    if res == 'yes':
+    if (res := tk.messagebox.askquestion(title='Sign Out', message='Confirm Sign Out?')) == 'yes':
         if DBHelper.sign_out():
             tk.messagebox.showinfo(title='Success', message='Successfully Signed Out!')
             user_menu_tk.destroy()
