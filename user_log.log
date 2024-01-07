@@ -250,3 +250,4 @@
 2024-01-07 13:00:43,959 [ERROR]: Failed authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:391
 2024-01-07 13:01:09,609 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
 2024-01-07 13:01:23,230 [INFO]: User %{username}s signed out successfully in /Users/chelseanieves/Fortune-Teller/sessionhandler.py:24
+2024-01-07 13:17:27,039 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396

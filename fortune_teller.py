@@ -30,7 +30,7 @@ def display_rules():
     rules_tk = Toplevel()
     rules_tk.geometry('650x415')
     rules_tk.title('Rules of the Fortune Teller')
-    center_window(rules_tk)
+    center_window(rules_tk, 650, 415)
 
     lbl = Label(rules_tk, text='How to Play the Fortune Teller Game\n', font='50')
     lbl.pack()
@@ -57,10 +57,10 @@ def user_menu():
     user_menu_tk = Toplevel(root)
     user_menu_tk.title('Fortune Teller')
     user_menu_tk.geometry('650x415')
-    center_window(user_menu_tk)
+    center_window(user_menu_tk, 650, 415)
 
     # add label and buttons to the window
-    welcome_user_message = 'Welcome Back, ' + sessionhandler.user_session['username'] + ' to the Fortune Teller Game!'
+    welcome_user_message = 'Welcome Back, ' + sessionhandler.user_session['username'] + ', to the Fortune Teller Game!'
     lbl1 = Label(user_menu_tk, text=welcome_user_message)
     lbl2 = Label(user_menu_tk, text='Reveal what your future holds!')
     lbl1.pack()
@@ -85,7 +85,7 @@ def login_window():
     # Initialize New Window
     login_tk = Toplevel(root)
     login_tk.title('User Login')
-    center_window(login_tk)
+    center_window(login_tk, 650, 415)
 
     # create new frame to contain the labels and entry boxes
     login_form = Frame(relief=SUNKEN, borderwidth=3)
@@ -93,6 +93,7 @@ def login_window():
 
     username_login_label = Label(login_tk, text='Username:')
     username_login_label.grid(row=0, column=0)
+
     password_login_label = Label(login_tk, text='Password:')
     password_login_label.grid(row=1, column=0)
 
@@ -100,11 +101,11 @@ def login_window():
     username_login_entry.grid(row=0, column=1)
 
     password_login_entry = Entry(login_tk, show='*')
-
     password_login_entry.grid(row=1, column=1)
 
     btn_login_submit = Button(master=login_tk, text='Login', command=lambda: user_login())
     btn_login_submit.grid(row=2, column=0)
+
     btn_login_close = Button(login_tk, text='Cancel', command=login_tk.destroy)
     btn_login_close.grid(row=2, column=1)
 
@@ -130,10 +131,10 @@ def registration_window():
     ''' This function is used to create new window that holds registration from '''
 
     # Initialize New Window
-    registration_tk = Toplevel()
-    registration_tk.geometry('330x270')
-    registration_tk.title('Registration Form')
-    center_window(registration_tk)
+    registration_tk = Toplevel(root)
+    registration_tk.geometry('650x415')
+    registration_tk.title('Registration')
+    center_window(registration_tk, 650, 415)
 
     # create new frame to contain the labels and entry boxes
     frm_form = Frame(relief=SUNKEN, borderwidth=3)
@@ -213,9 +214,9 @@ def fortune_menu():
     '''This menu will give the user the option to choose a category'''
     # Initialize New Window
     fortune_menu_tk = Toplevel()
-    fortune_menu_tk.geometry('300x200')
+    fortune_menu_tk.geometry('650x415')
     fortune_menu_tk.title('Fortune Menu')
-    center_window(fortune_menu_tk)
+    center_window(fortune_menu_tk, 650, 415)
 
     lbl = Label(fortune_menu_tk, text='Please select a category!')
     btn_love = Button(fortune_menu_tk, text='Love', command=lambda: display_fortune('Love'))
@@ -252,10 +253,10 @@ def display_fortune(category):
         user_fortune = get_random_fortune()
 
     # Initialize New Window
-    fortune_tk = Toplevel()
+    fortune_tk = Toplevel(root)
     fortune_tk.title('Fortune Menu')
-    fortune_tk.geometry('300x200')
-    center_window(fortune_tk)
+    fortune_tk.geometry('650x415')
+    center_window(fortune_tk, 650, 415)
 
     lbl = Label(fortune_tk, text='Your Fortune', font='50')
     lbl.pack()
@@ -317,8 +318,8 @@ def past_fortunes_window():
     # Initialize New Window
     previous_fortunes_tk = Toplevel()
     previous_fortunes_tk.title('Past Fortunes')
-    previous_fortunes_tk.geometry('725x300')
-    center_window(previous_fortunes_tk)
+    previous_fortunes_tk.geometry('650x415')
+    center_window(previous_fortunes_tk, 650, 415)
 
     # Username label
     username_label = Label(previous_fortunes_tk, text=username)
@@ -374,7 +375,7 @@ def main_menu():
     # geometry of the box (width x height)
     root.geometry('650x415')
     # center window
-    center_window(root)
+    center_window(root, 650, 415)
     # to close program using 'x' in title bar
     root.protocol("WM_DELETE_WINDOW", lambda:exit())
     root.bind("<Destroy>", None, True)
