@@ -15,7 +15,8 @@ from tkinter import messagebox
 #Wildcard import tkinter.ttk (wildcard-import)
 from tkinter.ttk import *
 import tkinter as tk
-import databasehelper as DBHelper
+from databasehelper import sign_up, save_fortune_to_table, get_previous_fortunes, create_table
+import sessionhandler
 ### Pylint WildCard Import
 from fthelper import *
 
@@ -27,7 +28,7 @@ def display_rules():
     ''' Create a window that displays the rules to the user'''
     # Initialize New Window
     rules_tk = Toplevel()
-    rules_tk.geometry('500x400')
+    rules_tk.geometry('650x415')
     rules_tk.title('Rules of the Fortune Teller')
     center_window(rules_tk)
 
@@ -49,12 +50,40 @@ def display_rules():
 
     rules_tk.mainloop()
 
+# Valerie Rudich 12/4/2023
+def user_menu():
+    '''Display Main Menu and Welcome Message for Authenticated Users'''
+    # Initialize New Window
+    user_menu_tk = Toplevel(root)
+    user_menu_tk.title('Fortune Teller')
+    user_menu_tk.geometry('650x415')
+    center_window(user_menu_tk)
+
+    # add label and buttons to the window
+    welcome_user_message = 'Welcome Back, ' + sessionhandler.user_session['username'] + ' to the Fortune Teller Game!'
+    lbl1 = Label(user_menu_tk, text=welcome_user_message)
+    lbl2 = Label(user_menu_tk, text='Reveal what your future holds!')
+    lbl1.pack()
+    lbl2.pack()
+
+    # add crystal ball ascii art
+    crystal_ball_ascii_art(user_menu_tk)
+
+    btn_get_frtn = Button(user_menu_tk, text='Get a Fortune', command=lambda: fortune_menu())
+    btn_past_frtn = Button(user_menu_tk, text='View Past Fortune',
+                           command=lambda: past_fortunes_window())
+
+    btn_get_frtn.pack()
+    btn_past_frtn.pack()
+
+    menu_bar(user_menu_tk)
+    user_menu_tk.mainloop()
+
 # Hoi Lam Wong 11/28/2023
 def login_window():
     '''This function is used for returning users'''
     # Initialize New Window
-    login_tk = Toplevel()
-    login_tk.geometry('300x100')
+    login_tk = Toplevel(root)
     login_tk.title('User Login')
     center_window(login_tk)
 
@@ -83,12 +112,13 @@ def login_window():
     def user_login():
         uname = username_login_entry.get().lower().strip()
         password = password_login_entry.get().strip()
+        
+        sessionhandler.login(uname, password)
 
-        if DBHelper.auth_user(uname, password):
+        if sessionhandler.is_authenticated():
             tk.messagebox.showinfo(title=None, message='Login Successful!')
             login_tk.destroy()
-            # hide root window when user logged in
-            root.withdraw()
+            #root.withdraw()
             user_menu()
         else:
             tk.messagebox.showinfo(title=None, message='Authentication Failed!')
@@ -167,7 +197,7 @@ def registration_window():
 
         # 8Dec Nieves, Chelsea
         # if sign_up returns true
-        if DBHelper.sign_up(uname, fname, lname, email, pass1, pass2):
+        if sign_up(uname, fname, lname, email, pass1, pass2):
             # Call method to create new window that contains the confirmation/ error message
             tk.messagebox.showinfo(title=None, message='Registration Successful! Please Log In')
             # destroy registration form if successfully signed up
@@ -239,7 +269,7 @@ def display_fortune(category):
     btn_fortune_new.pack()
     # Valerie Rudich 12/5/2023
     # adds save option only if the user is signed in
-    if DBHelper.is_user_logged_in:
+    if sessionhandler.is_authenticated():
         btn_fortune_save = tk.Button(fortune_tk, text='Save', bd='2',
                                      command=lambda: [save_fortune_confirm_window()])
         btn_fortune_save.pack()
@@ -247,7 +277,7 @@ def display_fortune(category):
     # Hoi Lam Wong 12/4/2023
     def save_fortune_confirm_window():
         if (res := tk.messagebox.askquestion('Save Fortune', 'Do you want to save your fortune?')) == 'yes' :
-            if DBHelper.save_fortune_to_table(category, user_fortune):
+            if save_fortune_to_table(category, user_fortune):
                 tk.messagebox.showinfo(title=None, message='Fortune saved successfully!')
             else :
                 tk.messagebox.showerror(title=None, message='Something went wrong!\n'
@@ -260,14 +290,14 @@ def display_fortune(category):
 def past_fortunes_window():
     ''' Method to create new window for displaying user's past fortunes '''
     # Check if user is logged in
-    if DBHelper.is_user_logged_in:
-        username = DBHelper.username
+    if sessionhandler.is_authenticated():
+        username = sessionhandler.user_session['username']
     else:
         username = 'GUEST: Not Logged In'
 
     def create_past_fortunes_table(win):
         ''' method to create table in win with dynamic height (rows) from data '''
-        past_fortunes = DBHelper.get_previous_fortunes(username)
+        past_fortunes = get_previous_fortunes(username)
 
         # Create table frame widget
         past_fortunes_table_frame = tk.Frame(win)
@@ -304,43 +334,11 @@ def past_fortunes_window():
 
     previous_fortunes_tk.mainloop()
 
-# Valerie Rudich 12/4/2023
-def user_menu():
-    '''New menu once user is logged in to choose new fortune or view old fortunes'''
-    # Initialize New Window
-    user_menu_tk = Toplevel()
-    user_menu_tk.geometry('650x400')
-    user_menu_tk.title('Fortune Teller')
-    center_window(user_menu_tk)
-    # to close program using 'x' in title bar
-    user_menu_tk.protocol("WM_DELETE_WINDOW", lambda: exit())
-    user_menu_tk.bind("<Destroy>", None, True)
-
-    # add label and buttons to the window
-    welcome_user_message = 'Welcome Back, ' + DBHelper.username + ' to the Fortune Teller Game!'
-    lbl1 = Label(user_menu_tk, text=welcome_user_message)
-    lbl2 = Label(user_menu_tk, text='Reveal what your future holds!')
-    lbl1.pack()
-    lbl2.pack()
-
-    # add crystal ball ascii art
-    crystal_ball_ascii_art(user_menu_tk)
-
-    btn_get_frtn = Button(user_menu_tk, text='Get a Fortune', command=lambda: fortune_menu())
-    btn_past_frtn = Button(user_menu_tk, text='View Past Fortune',
-                           command=lambda: past_fortunes_window())
-
-    btn_get_frtn.pack()
-    btn_past_frtn.pack()
-
-    menu_bar(user_menu_tk)
-    user_menu_tk.mainloop()
-
-
 def signout_window(user_menu_tk):
     ''' method to handle user sign out confirmation '''
     if (res := tk.messagebox.askquestion(title='Sign Out', message='Confirm Sign Out?')) == 'yes':
-        if DBHelper.sign_out():
+        sessionhandler.logout()
+        if not sessionhandler.is_authenticated():
             tk.messagebox.showinfo(title='Success', message='Successfully Signed Out!')
             user_menu_tk.destroy()
             root.deiconify() # main will not double print content in same window
@@ -349,7 +347,6 @@ def signout_window(user_menu_tk):
             tk.messagebox.showerror(title='Error', message ='Sign out failed!')
     else:
         return
-
 
 # Constance Sturm 12/6/23
 # Edited and Completed by Valerie Rudich 12/8/23
@@ -367,15 +364,11 @@ def menu_bar(window):
     # add Exit and Sign Out menu and commands
     program_exit = Menu(menubar, tearoff=0)
     menubar.add_cascade(label='Exit', menu=program_exit)
-    if DBHelper.is_user_logged_in :
+    if sessionhandler.is_authenticated():
         program_exit.add_command(label='Sign Out', command=lambda: signout_window(window))
     program_exit.add_command(label='Exit Program', command=exit)
 
-# Constance Sturm, Hoi Lam Wong
-def main_window():
-    '''Display Main Menu and Welcome Message'''
-    # call method to create db tables
-    DBHelper.create_table()
+def main_menu():
     # root window and title dimensions
     root.title('Fortune Teller')
     # geometry of the box (width x height)
@@ -406,9 +399,16 @@ def main_window():
 
     # display menu
     menu_bar(root)
+    # call mainloop() to display window
     root.mainloop()
+
+def main():
+    '''Display Main Menu and Welcome Message for Unauthenticated Users'''
+    # call method to create db tables
+    create_table()
+
+    main_menu()
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    #test
-    main_window()
+    main()

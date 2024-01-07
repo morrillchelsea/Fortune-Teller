@@ -235,3 +235,18 @@
 2023-12-10 15:13:13,537 [ERROR]: ERROR: Field cannot be left blank in /Users/chelseanieves/broken menu maybe/Fortune-Teller-1/databasehelper.py:104
 2023-12-10 15:13:13,537 [ERROR]: ERROR: Field may not contain special characters. in /Users/chelseanieves/broken menu maybe/Fortune-Teller-1/databasehelper.py:107
 2023-12-10 15:13:13,537 [ERROR]: ERROR: Length may not exceed 20 characters. in /Users/chelseanieves/broken menu maybe/Fortune-Teller-1/databasehelper.py:110
+2024-01-07 11:58:09,453 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
+2024-01-07 12:00:53,082 [INFO]: New registration: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:354
+2024-01-07 12:01:06,424 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
+2024-01-07 12:18:45,116 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
+2024-01-07 12:22:32,154 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
+2024-01-07 12:27:23,033 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
+2024-01-07 12:46:26,772 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
+2024-01-07 12:47:59,278 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
+2024-01-07 12:50:15,016 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
+2024-01-07 12:56:43,317 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
+2024-01-07 12:57:31,523 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
+2024-01-07 12:58:46,234 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
+2024-01-07 13:00:43,959 [ERROR]: Failed authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:391
+2024-01-07 13:01:09,609 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
+2024-01-07 13:01:23,230 [INFO]: User %{username}s signed out successfully in /Users/chelseanieves/Fortune-Teller/sessionhandler.py:24

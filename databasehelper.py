@@ -13,8 +13,6 @@ from loghandler import user_logger, db_logger
 SPECIAL_CHAR = string.punctuation  # special characters to validate password requirements
 DB_NAME = 'FortuneTeller.db' # Create a new database
 COMMON_PASS_PATH = 'texts/CommonPassword.txt' # file of common pass for password input validation
-is_user_logged_in = False # global var to track user authentication state
-username = '' #global var to track username of authenticated user
 
 def read_sqlite_table():
     '''TESTING METHOD
@@ -408,23 +406,6 @@ def auth_user(uname, password):
         #log error
         user_logger.error('Failed authentication, username %(uname)s does not exist')
     return False
-
-#Valerie Rudich 12/5/2023
-#Chelsea Nieves 12/8/23
-def sign_out():
-    '''Signs user out and resets global variables'''
-    global is_user_logged_in
-    global username
-
-    if is_user_logged_in and username:
-        user_logger.info('User %{username}s signed out successfully')
-        is_user_logged_in = False
-        username = ''
-        return True
-    else:
-        #message = f''
-        user_logger.error('User %{username}s Could Not Be Signed Out!')
-        return False
 
 def get_previous_fortunes(uname):
     '''Displays previous fortunes to authenticated user'''
