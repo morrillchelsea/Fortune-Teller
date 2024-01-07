@@ -9,7 +9,7 @@ Programming Language: Python3
 Additional Libraries: bcrypt
 
 ### Upcoming updates:
-- Improved user session management (remove global var)
+- [7 Jan 24] Improved user session management (remove global var)
 
 ## Installation
 To run the Fortune Teller program using the Git Command Line, run the following commands in order by typing (or copying the highlighted portion) into the terminal and pressing enter.
