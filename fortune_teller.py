@@ -306,8 +306,8 @@ def past_fortunes_window():
     # Initialize New Window
     previous_fortunes_tk = Toplevel(root)
     previous_fortunes_tk.title('Past Fortunes')
-    previous_fortunes_tk.geometry('650x415')
-    center_window(previous_fortunes_tk, 650, 415)
+    previous_fortunes_tk.geometry('800x415')
+    center_window(previous_fortunes_tk, 800, 415)
 
     # Create table
     columns, data = get_previous_fortunes(username)
@@ -315,18 +315,13 @@ def past_fortunes_window():
     tree = Treeview(previous_fortunes_tk, columns = columns, show ='headings')
     for col in columns:
         tree.heading(col, text = col)
-        tree.column(col, anchor='center')
+        if col == 'Fortune':
+            tree.column(col, minwidth=0, width=300)
+        else:
+            tree.column(col, minwidth=0, width=100, stretch=NO)
     for row in data:
         tree.insert('', 'end', values=row)
-    tree.pack(fill='both', expand=True)
-    scrlbar = Scrollbar(previous_fortunes_tk, 
-                           orient ="horizontal", 
-                           command = tree.yview)
- 
-    scrlbar.pack(side ='bottom', fill ='y')
-    
-    # Configuring treeview
-    tree.configure(yscrollcommand = scrlbar.set)
+    tree.pack(fill = 'x')
 
     # Button for Action
     btn_close = tk.Button(previous_fortunes_tk, text='Close', bd='5',
