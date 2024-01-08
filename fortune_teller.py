@@ -54,7 +54,7 @@ def display_rules():
 def user_menu():
     '''Display Main Menu and Welcome Message for Authenticated Users'''
     # Initialize New Window
-    user_menu_tk = Toplevel(root)
+    user_menu_tk = Toplevel()
     user_menu_tk.title('Fortune Teller')
     user_menu_tk.geometry('650x415')
     center_window(user_menu_tk, 650, 415)
@@ -82,33 +82,6 @@ def user_menu():
 # Hoi Lam Wong 11/28/2023
 def login_window():
     '''This function is used for returning users'''
-    # Initialize New Window
-    login_tk = Toplevel(root)
-    login_tk.title('User Login')
-    center_window(login_tk, 650, 415)
-
-    # create new frame to contain the labels and entry boxes
-    login_form = Frame(relief=SUNKEN, borderwidth=3)
-    login_form.pack()
-
-    username_login_label = Label(login_tk, text='Username:')
-    username_login_label.grid(row=0, column=0)
-
-    password_login_label = Label(login_tk, text='Password:')
-    password_login_label.grid(row=1, column=0)
-
-    username_login_entry = Entry(login_tk)
-    username_login_entry.grid(row=0, column=1)
-
-    password_login_entry = Entry(login_tk, show='*')
-    password_login_entry.grid(row=1, column=1)
-
-    btn_login_submit = Button(master=login_tk, text='Login', command=lambda: user_login())
-    btn_login_submit.grid(row=2, column=0)
-
-    btn_login_close = Button(login_tk, text='Cancel', command=login_tk.destroy)
-    btn_login_close.grid(row=2, column=1)
-
     # Hoi Lam Wong 12/4/2023
     def user_login():
         uname = username_login_entry.get().lower().strip()
@@ -119,71 +92,46 @@ def login_window():
         if sessionhandler.is_authenticated():
             tk.messagebox.showinfo(title=None, message='Login Successful!')
             login_tk.destroy()
-            #root.withdraw()
+            root.withdraw()
             user_menu()
         else:
             tk.messagebox.showinfo(title=None, message='Authentication Failed!')
-    login_tk.mainloop()
-
-# Constance 11/25/23
-# Modified by Hoi Lam Wong 11/27/2023
-def registration_window():
-    ''' This function is used to create new window that holds registration from '''
-
     # Initialize New Window
-    registration_tk = Toplevel(root)
-    registration_tk.geometry('650x415')
-    registration_tk.title('Registration')
-    center_window(registration_tk, 650, 415)
+    login_tk = Toplevel(root)
+    login_tk.title('User Login')
+    center_window(login_tk, 650, 415)
 
     # create new frame to contain the labels and entry boxes
-    frm_form = Frame(relief=SUNKEN, borderwidth=3)
-    frm_form.pack()
+    login_form = Frame(login_tk, relief=SUNKEN, borderwidth=3)
+    login_form.pack(side = 'top')
 
-    first_name_label = Label(registration_tk, text='First Name:')
-    first_name_label.grid(row=0, column=0)
-    last_name_label = Label(registration_tk, text='Last Name:')
-    last_name_label.grid(row=1, column=0)
-    username_label = Label(registration_tk, text='Username:')
-    username_label.grid(row=2, column=0)
-    email_label = Label(registration_tk, text='Email:')
-    email_label.grid(row=3, column=0)
-    password_label = Label(registration_tk, text='Password:')
-    password_label.grid(row=4, column=0)
-    password_confirm_label = Label(registration_tk, text='Confirm Password:')
-    password_confirm_label.grid(row=5, column=0)
+    username_login_label = Label(login_form, text='Username:')
+    username_login_label.grid(row=1, column=0, pady=10)
 
-    first_name_entry = Entry(registration_tk)
-    first_name_entry.grid(row=0, column=1)
-    last_name_entry = Entry(registration_tk)
-    last_name_entry.grid(row=1, column=1)
-    username_entry = Entry(registration_tk)
-    username_entry.grid(row=2, column=1)
-    email_entry = Entry(registration_tk)
-    email_entry.grid(row=3, column=1)
-    password_entry = Entry(registration_tk, show='*')
-    # password_entry = Entry(registration_tk)
-    password_entry.grid(row=4, column=1)
-    password_confirm_entry = Entry(registration_tk, show='*')
-    password_confirm_entry.grid(row=5, column=1)
+    password_login_label = Label(login_form, text='Password:')
+    password_login_label.grid(row=2, column=0, pady=10)
 
-    # Added 12/10/2023 Hoi Lam, for displaying password requirement in window
+    username_login_entry = Entry(login_form)
+    username_login_entry.grid(row=1, column=2, pady=10)
 
-    password_must_be_label = Label(registration_tk, text='Password must \ncontain at least :')
-    password_must_be_label.grid(row=7, column=0)
-    password_requirement_label = Label(registration_tk, text='\n - 12 characters\n'
-                                                             ' - 1 numerical character \n'
-                                                             ' - 1 lowercase character  \n'
-                                                             ' - 1 uppercase character \n'
-                                                             ' - 1 special character \n')
-    password_requirement_label.grid(row=7, column=1)
+    password_login_entry = Entry(login_form, show='*')
+    password_login_entry.grid(row=2, column=2, pady=10)
 
-    btn_submit = Button(master=registration_tk, text='Submit',
-                        command=lambda: user_register())
-    btn_submit.grid(row=9, column=0)
-    btn_close = Button(registration_tk, text='Close', command=registration_tk.destroy)
-    btn_close.grid(row=9, column=1)
+     # Create a frame for buttons
+    frm_buttons = Frame(login_tk)
+    frm_buttons.pack(side=BOTTOM, pady=10)
 
+    btn_login_submit = Button(frm_buttons, text='Login', command=lambda: user_login())
+    btn_login_submit.pack(side = 'right', padx=5)
+
+    btn_login_close = Button(frm_buttons, text='Cancel', command=login_tk.destroy)
+    btn_login_close.pack(side = 'right', padx=5)
+
+    login_tk.mainloop()
+
+# Constance 11/27/2023, 12/5/23
+def registration_window():
+    ''' This function is used to create a new window that holds registration form '''
     def user_register():
         '''Method for registration() for backend
         Note: This method is part of/inside of method registration()
@@ -199,12 +147,64 @@ def registration_window():
         # 8Dec Nieves, Chelsea
         # if sign_up returns true
         if sign_up(uname, fname, lname, email, pass1, pass2):
-            # Call method to create new window that contains the confirmation/ error message
+            # Call method to create a new window that contains the confirmation/error message
             tk.messagebox.showinfo(title=None, message='Registration Successful! Please Log In')
-            # destroy registration form if successfully signed up
+            # Destroy the registration form if successfully signed up
             registration_tk.destroy()
-        #else:
-            #tk.messagebox.showerror(title=None, message='Registration Failed!')
+    # Initialize New Window
+    registration_tk = Toplevel(root)
+    registration_tk.geometry('650x415')
+    registration_tk.title('Registration')
+    center_window(registration_tk, 650, 415)
+
+    # Create new frame to contain the labels and entry boxes
+    frm_form = Frame(registration_tk, relief=SUNKEN, borderwidth=3)
+    frm_form.pack(side = 'top')
+
+    first_name_label = Label(frm_form, text='First Name:')
+    first_name_label.grid(row=0, column=0)
+    last_name_label = Label(frm_form, text='Last Name:')
+    last_name_label.grid(row=1, column=0)
+    username_label = Label(frm_form, text='Username:')
+    username_label.grid(row=2, column=0)
+    email_label = Label(frm_form, text='Email:')
+    email_label.grid(row=3, column=0)
+    password_label = Label(frm_form, text='Password:')
+    password_label.grid(row=4, column=0)
+    password_confirm_label = Label(frm_form, text='Confirm Password:')
+    password_confirm_label.grid(row=5, column=0)
+
+    first_name_entry = Entry(frm_form)
+    first_name_entry.grid(row=0, column=1)
+    last_name_entry = Entry(frm_form)
+    last_name_entry.grid(row=1, column=1)
+    username_entry = Entry(frm_form)
+    username_entry.grid(row=2, column=1)
+    email_entry = Entry(frm_form)
+    email_entry.grid(row=3, column=1)
+    password_entry = Entry(frm_form, show='*')
+    password_entry.grid(row=4, column=1)
+    password_confirm_entry = Entry(frm_form, show='*')
+    password_confirm_entry.grid(row=5, column=1)
+
+    # Added 12/10/2023 Hoi Lam, for displaying password requirement in window
+    password_must_be_label = Label(frm_form, text='Password must \ncontain at least :')
+    password_must_be_label.grid(row=7, column=0)
+    password_requirement_label = Label(frm_form, text='\n - 12 characters\n'
+                                                       ' - 1 numerical character \n'
+                                                       ' - 1 lowercase character  \n'
+                                                       ' - 1 uppercase character \n'
+                                                       ' - 1 special character \n')
+    password_requirement_label.grid(row=7, column=1)
+
+    # Create a frame for buttons
+    frm_buttons = Frame(registration_tk)
+    frm_buttons.pack(side=BOTTOM, pady=10)
+
+    btn_submit = Button(frm_buttons, text='Submit', command=user_register)
+    btn_submit.pack(side='right', padx=5)
+    btn_close = Button(frm_buttons, text='Cancel', command=registration_tk.destroy)
+    btn_close.pack(side='right', padx=5)
 
     # Call to create registration_tk... END of registration TK
     registration_tk.mainloop()
@@ -219,14 +219,21 @@ def fortune_menu():
     center_window(fortune_menu_tk, 650, 415)
 
     lbl = Label(fortune_menu_tk, text='Please select a category!')
-    btn_love = Button(fortune_menu_tk, text='Love', command=lambda: display_fortune('Love'))
-    btn_career = Button(fortune_menu_tk, text='Career', command=lambda: display_fortune('Career'))
-    btn_health = Button(fortune_menu_tk, text='Health', command=lambda: display_fortune('Health'))
-    btn_general = Button(fortune_menu_tk, text='General',
-                         command=lambda: display_fortune('General'))
-    btn_random = Button(fortune_menu_tk, text='Random', command=lambda: display_fortune('Random'))
-
     lbl.pack()
+
+    # Create a frame for buttons
+    frm_buttons = Frame(fortune_menu_tk)
+    frm_buttons.pack(pady=10)
+
+    # delcare buttons
+    btn_love = Button(frm_buttons, text='Love', command=lambda: display_fortune('Love'))
+    btn_career = Button(frm_buttons, text='Career', command=lambda: display_fortune('Career'))
+    btn_health = Button(frm_buttons, text='Health', command=lambda: display_fortune('Health'))
+    btn_general = Button(frm_buttons, text='General',
+                         command=lambda: display_fortune('General'))
+    btn_random = Button(frm_buttons, text='Random', command=lambda: display_fortune('Random'))
+
+    # pack buttons to frame
     btn_love.pack()
     btn_career.pack()
     btn_health.pack()
@@ -239,6 +246,15 @@ def fortune_menu():
 def display_fortune(category):
     ''' Method to create a new window to display user's fortune 
     based on the category they choose in fortune menu'''
+    # Hoi Lam Wong 12/4/2023
+    def save_fortune_confirm_window():
+        if (res := tk.messagebox.askquestion('Save Fortune', 'Do you want to save your fortune?')) == 'yes' :
+            if save_fortune_to_table(category, user_fortune):
+                tk.messagebox.showinfo(title=None, message='Fortune saved successfully!')
+            else :
+                tk.messagebox.showerror(title=None, message='Something went wrong!\n'
+                                        'Unable to save fortune.')
+                fortune_tk.destroy()
 
     user_fortune = ''
     if category == 'Love':
@@ -257,13 +273,16 @@ def display_fortune(category):
     fortune_tk.title('Fortune Menu')
     fortune_tk.geometry('650x415')
     center_window(fortune_tk, 650, 415)
+    
+    # Create a frame for buttons
+    frm_fortune = Frame(fortune_tk, relief=SUNKEN, borderwidth=3)
+    frm_fortune.pack(pady=10)
 
-    lbl = Label(fortune_tk, text='Your Fortune', font='50')
+    header = f'Your {category} Fortune'
+    lbl = Label(frm_fortune, text=header)
     lbl.pack()
-    lbl_category = Label(fortune_tk, text=category, font='40')
-    lbl_category.pack()
 
-    fortune_message = Message(fortune_tk, text=user_fortune)
+    fortune_message = Message(frm_fortune, text=user_fortune, width = 250)
     fortune_message.pack()
 
     btn_fortune_new = tk.Button(fortune_tk, text='New Fortune', bd='2', command=fortune_tk.destroy)
@@ -275,64 +294,46 @@ def display_fortune(category):
                                      command=lambda: [save_fortune_confirm_window()])
         btn_fortune_save.pack()
 
-    # Hoi Lam Wong 12/4/2023
-    def save_fortune_confirm_window():
-        if (res := tk.messagebox.askquestion('Save Fortune', 'Do you want to save your fortune?')) == 'yes' :
-            if save_fortune_to_table(category, user_fortune):
-                tk.messagebox.showinfo(title=None, message='Fortune saved successfully!')
-            else :
-                tk.messagebox.showerror(title=None, message='Something went wrong!\n'
-                                        'Unable to save fortune.')
-                fortune_tk.destroy()
-        else:
-            return
-
 # Hoi Lam Wong 12/4/2023
 def past_fortunes_window():
     ''' Method to create new window for displaying user's past fortunes '''
-    # Check if user is logged in
+    # Get username if user is logged in
     if sessionhandler.is_authenticated():
         username = sessionhandler.user_session['username']
     else:
         username = 'GUEST: Not Logged In'
 
-    def create_past_fortunes_table(win):
-        ''' method to create table in win with dynamic height (rows) from data '''
-        past_fortunes = get_previous_fortunes(username)
-
-        # Create table frame widget
-        past_fortunes_table_frame = tk.Frame(win)
-        past_fortunes_table_frame.grid(row=1, column=0, padx=10, pady=10)
-
-        scrollbar = Scrollbar(past_fortunes_table_frame)
-        scrollbar.pack(side=RIGHT, fill=Y)
-
-        mylist = Listbox(past_fortunes_table_frame, yscrollcommand=scrollbar.set, width=75)
-        for row in past_fortunes:
-            mylist.insert(END, row)
-
-        mylist.pack(side=LEFT, fill=BOTH)
-
-        scrollbar.config(command=mylist.yview)
-
     # Initialize New Window
-    previous_fortunes_tk = Toplevel()
+    previous_fortunes_tk = Toplevel(root)
     previous_fortunes_tk.title('Past Fortunes')
     previous_fortunes_tk.geometry('650x415')
     center_window(previous_fortunes_tk, 650, 415)
 
-    # Username label
-    username_label = Label(previous_fortunes_tk, text=username)
-    username_label.grid(row=0, column=0)
-
     # Create table
-    create_past_fortunes_table(previous_fortunes_tk)
+    columns, data = get_previous_fortunes(username)
+
+    tree = Treeview(previous_fortunes_tk, columns = columns, show ='headings')
+    for col in columns:
+        tree.heading(col, text = col)
+        tree.column(col, anchor='center')
+    for row in data:
+        tree.insert('', 'end', values=row)
+    tree.pack(fill='both', expand=True)
+    scrlbar = Scrollbar(previous_fortunes_tk, 
+                           orient ="horizontal", 
+                           command = tree.yview)
+ 
+    scrlbar.pack(side ='bottom', fill ='y')
+    
+    # Configuring treeview
+    tree.configure(yscrollcommand = scrlbar.set)
 
     # Button for Action
     btn_close = tk.Button(previous_fortunes_tk, text='Close', bd='5',
                           command=previous_fortunes_tk.destroy)
-    btn_close.grid(row=2, column=0)
-
+    btn_close.pack()
+   
+    previous_fortunes_tk.update_idletasks()
     previous_fortunes_tk.mainloop()
 
 def signout_window(user_menu_tk):

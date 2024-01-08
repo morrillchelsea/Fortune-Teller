@@ -251,3 +251,33 @@
 2024-01-07 13:01:09,609 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:398
 2024-01-07 13:01:23,230 [INFO]: User %{username}s signed out successfully in /Users/chelseanieves/Fortune-Teller/sessionhandler.py:24
 2024-01-07 13:17:27,039 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 13:29:22,676 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 13:45:29,370 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 13:47:15,827 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 13:47:53,023 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 13:52:12,729 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 13:55:43,236 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 13:58:44,507 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 14:02:10,275 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 14:03:53,423 [ERROR]: Failed authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:389
+2024-01-07 14:04:03,926 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 14:06:15,760 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 14:09:24,369 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 14:13:57,447 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 15:23:42,602 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-07 15:24:04,153 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-08 09:18:31,538 [ERROR]: ERROR: Field cannot be left blank in /Users/chelseanieves/Fortune-Teller/databasehelper.py:102
+2024-01-08 09:18:31,540 [ERROR]: Failed authentication, username %(uname)s does not exist in /Users/chelseanieves/Fortune-Teller/databasehelper.py:407
+2024-01-08 09:23:41,475 [ERROR]: ERROR: Field cannot be left blank in /Users/chelseanieves/Fortune-Teller/databasehelper.py:102
+2024-01-08 09:23:41,476 [ERROR]: Failed authentication, username %(uname)s does not exist in /Users/chelseanieves/Fortune-Teller/databasehelper.py:407
+2024-01-08 09:23:51,788 [ERROR]: ERROR: Field cannot be left blank in /Users/chelseanieves/Fortune-Teller/databasehelper.py:102
+2024-01-08 09:23:51,788 [ERROR]: ERROR: Field cannot be left blank in /Users/chelseanieves/Fortune-Teller/databasehelper.py:102
+2024-01-08 09:44:36,699 [ERROR]: ERROR: Field cannot be left blank in /Users/chelseanieves/Fortune-Teller/databasehelper.py:102
+2024-01-08 09:44:36,703 [ERROR]: Failed authentication, username %(uname)s does not exist in /Users/chelseanieves/Fortune-Teller/databasehelper.py:407
+2024-01-08 09:45:22,823 [ERROR]: Failed authentication, username %(uname)s does not exist in /Users/chelseanieves/Fortune-Teller/databasehelper.py:407
+2024-01-08 09:47:59,731 [ERROR]: ERROR: Field cannot be left blank in /Users/chelseanieves/Fortune-Teller/databasehelper.py:102
+2024-01-08 09:47:59,731 [ERROR]: Failed authentication, username %(uname)s does not exist in /Users/chelseanieves/Fortune-Teller/databasehelper.py:407
+2024-01-08 09:50:00,859 [ERROR]: ERROR: Field cannot be left blank in /Users/chelseanieves/Fortune-Teller/databasehelper.py:102
+2024-01-08 09:50:00,860 [ERROR]: Failed authentication, username %(uname)s does not exist in /Users/chelseanieves/Fortune-Teller/databasehelper.py:407
+2024-01-08 10:05:46,690 [INFO]: Successful authentication, username: %(uname)s in /Users/chelseanieves/Fortune-Teller/databasehelper.py:396
+2024-01-08 10:06:18,981 [INFO]: User %{username}s signed out successfully in /Users/chelseanieves/Fortune-Teller/sessionhandler.py:22

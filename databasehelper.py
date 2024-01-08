@@ -420,21 +420,11 @@ def get_previous_fortunes(uname):
         # query db for fortunes associated with fk userId
         fortunes_cur = cur.execute('SELECT save_date, category, message FROM fortune WHERE userId = (?)',
                                 (uname,))
+        columns = [description[0] for description in fortunes_cur.description]
+        columns = ['Date', 'Category', 'Fortune']  # Replace with your custom headers
         res = fortunes_cur.fetchall()
         # commit db session
         con.commit()
-
-        if len(res) > 0: # if user has prev fortunes in db
-            header1 = '****DATE  :  CATEGORY  :  FORTUNE****'
-            header2 = '------------------------------------------'
-            previous_fortunes.append(header1)
-            previous_fortunes.append(header2)
-            #print(header1)
-            #print(header2)
-            for save_date, category, message in res:
-                res_strng = f'{save_date}  :  {category}  :  {message}'
-                #print(res_strng)
-                previous_fortunes.append(res_strng)
     except sqlite3.Error as err:
         db_logger.error(err)
     finally:
@@ -442,7 +432,7 @@ def get_previous_fortunes(uname):
             # close DB cursor
             cur.close()
             con.close()
-    return previous_fortunes
+    return columns, res
 
 def save_fortune_to_table(category, fortune):
     ''' Save fortune to authenticated user '''
